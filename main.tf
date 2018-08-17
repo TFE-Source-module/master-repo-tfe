@@ -14,7 +14,7 @@ provider "aws" {
 // Modules
 //--------------------------------------------------------------------
 // Modules
-module "vpc" {
+module "corevpc" {
   source  = "app.terraform.io/iaac-anz-private/vpc/aws"
   version = "0.1.4"
 
@@ -23,3 +23,4 @@ module "vpc" {
   env = "PoC"
   vpc_name = "Core-Network-VPC"
 }
+
