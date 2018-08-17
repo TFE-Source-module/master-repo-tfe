@@ -36,7 +36,7 @@ module "private-subnets" {
   subnet_name = "private-subnet"
   vpc_id = "${module.corevpc.vpcid}"
   subnet_cidr_block = "10.0.2.0/24", "10.0.3.0/24"
-  availability_zone = "${data.aws_availability_zones.available.*.names}"
+  availability_zone = "${data.aws_availability_zones.available.names}"
   create_vpc = "${var.create_vpc}"
   env = "PoC"
 }
