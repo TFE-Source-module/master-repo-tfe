@@ -19,7 +19,7 @@ module "vpc" {
   version = "0.1.4"
 
   cidr_block = ["10.0.0.0/16"]
-  create_vpc = "true"
+  create_vpc = "false"
   env = "PoC"
   vpc_name = "Core-Network-VPC"
 }
