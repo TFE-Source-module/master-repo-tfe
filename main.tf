@@ -3,6 +3,9 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "region" {}
 variable "create_vpc" {}
+//--------------------------------------------------------------------
+// Data sources
+data "aws_availability_zones" "available" {}
 
 //--------------------------------------------------------------------
 // Provider information
