@@ -8,10 +8,10 @@ output "vpcarn" {
    
 }
 
-/*output "vpcname" {
+output "vpcname" {
     value = "${module.vpc.vpcname}"
     
-}*/
+}
 
 output "vpc-cidr" {
     value = "${module.vpc.vpc-cidr}"
