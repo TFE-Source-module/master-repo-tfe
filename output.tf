@@ -1,38 +1,38 @@
 output "vpcid" {
-    value = "${module.vpc.vpcid}"
+    value = "${module.corevpc.vpcid}"
     
 }
 
 output "vpcarn" {
-    value = "${module.vpc.vpcarn}"
+    value = "${module.corevpc.vpcarn}"
    
 }
 
 /*output "vpcname" {
-    value = "${module.vpc.vpcname}"
+    value = "${module.corevpc.vpcname}"
     
 }*/
 
 output "vpc-cidr" {
-    value = "${module.vpc.vpc-cidr}"
+    value = "${module.corevpc.vpc-cidr}"
     
 }
 
 output "main-rt" {
-    value = "${module.vpc.main-rt}"
+    value = "${module.corevpc.main-rt}"
     
 }
 
 output "default-nacl" {
-    value = "${module.vpc.default-nacl}"
+    value = "${module.corevpc.default-nacl}"
     
 }
 
 output "default-sg" {
-    value = "${module.vpc.default-sg}"
+    value = "${module.corevpc.default-sg}"
     
 }
 
 output "default-rt" {
-    value = "${module.vpc.default-rt}"
+    value = "${module.corevpc.default-rt}"
 }
