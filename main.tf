@@ -2,6 +2,7 @@
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "region" {}
+variable "create_vpc" {}
 
 //--------------------------------------------------------------------
 // Provider information
@@ -19,9 +20,20 @@ module "corevpc" {
   version = "0.1.4"
 
   cidr_block = ["10.0.0.0/16"]
-  create_vpc = "true"
+  create_vpc = "${var.create_vpc}"
   env = "PoC"
   vpc_name = "Core-Network-VPC"
   
 }
 
+module "private-subnets" {
+  source  = "app.terraform.io/iaac-anz-private/subnet/aws"
+  version = "0.1.1"
+  subnet_count = 2
+  subnet_name = "private-subnet"
+  vpc_id = "${module.corevpc.vpcid}"
+  subnet_cidr_block = ["10.0.2.0/24", "10.0.3.0/24"]
+  availability_zone = "${data.aws_availability_zones.available.names}"
+  create_vpc = "${var.create_vpc}"
+  env = "PoC"
+}
