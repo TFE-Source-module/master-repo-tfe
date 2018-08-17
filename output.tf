@@ -1,3 +1,3 @@
 output "vpcid" {
-    value = "${module.vpc.id}"
+    value = "${module.vpc.vpcid}"
 }
