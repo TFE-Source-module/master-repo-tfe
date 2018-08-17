@@ -29,14 +29,14 @@ module "corevpc" {
   
 }
 
-/*module "private-subnets" {
+module "private-subnets" {
   source  = "app.terraform.io/iaac-anz-private/subnet/aws"
   version = "0.1.2"
-  subnet_count = 2
+  subnet_count = 1
   subnet_name = "private-subnet"
   vpc_id = "${module.corevpc.vpcid}"
-  subnet_cidr_block = "10.0.2.0/24", "10.0.3.0/24"
+  subnet_cidr_block = "10.0.2.0/24"
   availability_zone = "${data.aws_availability_zones.available.names}"
   create_vpc = "${var.create_vpc}"
   env = "PoC"
-}*/
+}
