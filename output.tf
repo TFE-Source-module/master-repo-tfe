@@ -36,3 +36,7 @@ output "default-sg" {
 output "default-rt" {
     value = "${module.corevpc.default-rt}"
 }
+
+output "az" {
+    value = "${data.aws_availability_zones.available.names}"
+}
