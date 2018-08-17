@@ -31,7 +31,7 @@ module "corevpc" {
 
 module "private-subnets" {
   source  = "app.terraform.io/iaac-anz-private/subnet/aws"
-  version = "0.1.1"
+  version = "0.1.2"
   subnet_count = 2
   subnet_name = "private-subnet"
   vpc_id = "${module.corevpc.vpcid}"
