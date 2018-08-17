@@ -22,8 +22,6 @@ module "corevpc" {
   create_vpc = "true"
   env = "PoC"
   vpc_name = "Core-Network-VPC"
-  lifecycle {
-    ignore_changes = ["module"]
-  }
+  
 }
 
