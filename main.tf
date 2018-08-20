@@ -48,7 +48,7 @@ module "corevpc" {
   
 }
 
-/*module "private-subnets" {
+module "private-subnets" {
   source  = "app.terraform.io/iaac-anz-private/subnet/aws"
   version = "0.1.7"
   subnet_name = "private-subnet"
@@ -190,4 +190,4 @@ module "paas-elasticbeanstalk" {
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
   public_subnet = "${module.public-subnet.subnetid}"
-}*/
+}
