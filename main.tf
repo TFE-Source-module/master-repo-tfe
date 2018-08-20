@@ -181,7 +181,7 @@ module "beanstalk-role" {
 }
 
 module "paas-elasticbeanstalk" {
-  source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
+  source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
   version = "0.1.1"
   env = "PoC"
   appname = "sampleapp"
