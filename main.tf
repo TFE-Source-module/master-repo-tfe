@@ -140,7 +140,7 @@ module "igw" {
 
 module "ngweip" {
   source       = "app.terraform.io/iaac-anz-private/eip/aws"
-  version = "0.1.0"
+  version = "0.1.2"
   create_vpc   = "${var.create_vpc}"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   eip          = true
