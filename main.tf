@@ -152,7 +152,7 @@ module "ngw" {
   version = "0.1.1"
   nat_gateway_route = true
   env               = "PoC"
-  count = "${var.single_nat ? 1 : length(var.private-subnet_cidr_block)}"
+  count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   create_vpc        = "${var.create_vpc}"
   subnet_id         = "${module.public-subnet.subnetid[0]}"
   allocation_id     = "${module.ngweip.eipalloc}"
