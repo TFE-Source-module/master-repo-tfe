@@ -3,6 +3,7 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "region" {}
 variable "create_vpc" {}
+variable "enable_dhcp_options" {}
 
 //--------------------------------------------------------------------
 // Data sources
@@ -38,5 +39,32 @@ module "private-subnets" {
   subnet_cidr_block = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
   availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
   create_vpc = "${var.create_vpc}"
+  env = "PoC"
+}
+
+module "public-subnet" {
+  source = "app.terraform.io/iaac-anz-private/subnet/aws"
+  version = "0.1.6"
+  subnet_name = "public-subnet"
+  vpc_id = "${module.corevpc.vpcid}"
+  subnet_cidr_block = ["10.0.6.0/24", "10.0.7.0/24"]
+  availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
+  create_vpc = "${var.create_vpc}"
+  env = "PoC"
+}
+
+module "core-network-dhcp" {
+  # Configure DHCP Option set
+  source              = "app.terraform.io/iaac-anz-private/dhcp/aws"
+  version = "0.1.0"
+  name                = "core-network-dhcp"
+  vpc_id              = "${module.corevpc.vpcid}"
+  domain_name = "poc.local"
+  domain_name_servers = ["127.0.0.1", "10.0.0.2"]
+  ntp_servers = ["127.0.0.1"]
+  netbios_name_servers = ["127.0.0.1"]
+  netbios_node_type = 2
+  create_vpc          = "${var.create_vpc}"
+  enable_dhcp_options = "${var.enable_dhcp_options}"
   env = "PoC"
 }
