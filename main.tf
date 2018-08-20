@@ -150,7 +150,7 @@ module "ngweip" {
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.1.8"
+  version = "0.1.9"
   nat_gateway_route = false
   env               = "PoC"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
@@ -182,7 +182,7 @@ module "beanstalk-role" {
 
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
-  version = "0.1.2"
+  version = "0.1.3"
   env = "PoC"
   appname = "sampleapp"
   service_role = "${module.beanstalk-role.rolearn}"
