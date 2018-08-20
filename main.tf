@@ -149,16 +149,18 @@ module "ngweip" {
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.1.3"
+  version = "0.1.4"
   nat_gateway_route = true
   env               = "PoC"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   create_vpc        = "${var.create_vpc}"
   subnet_id         = "${module.public-subnet.subnetid[0]}"
   allocation_id     = "${module.ngweip.eipalloc}"
+  route_table_id         = "${module.private-route-table.rtid}"
+  destination_cidr_block = "0.0.0.0/0"
 }
 
-module "ngwroute" {
+/*module "ngwroute" {
   source                 = "app.terraform.io/iaac-anz-private/route/aws"
   version = "0.1.4"
   route_table_id         = "${module.private-route-table.rtid}"
@@ -168,4 +170,4 @@ module "ngwroute" {
   nat_gateway_route      = true
   nat_gateway_id         = ["${module.ngw.ngw}"]
   gateway_route = false
-}
+}*/
