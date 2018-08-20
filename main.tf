@@ -166,6 +166,6 @@ module "ngwroute" {
   destination_cidr_block = "0.0.0.0/0"
   create_vpc             = "${var.create_vpc}"
   nat_gateway_route      = true
-  nat_gateway_id         = "${module.ngw.ngw}"
+  nat_gateway_id         = ["${module.ngw.ngw}"]
   gateway_route = false
 }
