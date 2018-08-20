@@ -1,14 +1,25 @@
 // Variables declaration
 variable "aws_access_key" {}
+
 variable "aws_secret_key" {}
+
 variable "region" {}
+
 variable "create_vpc" {}
+
 variable "enable_dhcp_options" {}
+
 variable "private-subnet-cidr_block" {
   default = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
 }
+
 variable "public-subnet-cidr_block" {
   default = ["10.0.6.0/24", "10.0.7.0/24"]
+}
+
+variable "single_nat" {
+  default = true
+  description = "Set to "true" for single NAT gateway for all private subnets. Defaults to true"
 }
 
 //--------------------------------------------------------------------
@@ -126,3 +137,24 @@ module "igw" {
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
 }
+
+module "ngweip" {
+  source       = "app.terraform.io/iaac-anz-private/eip/aws"
+  version = "0.1.0"
+  create_vpc   = "${var.create_vpc}"
+  count = "${var.single_nat ? 1 : length(var.private-subnet_cidr_block)}"
+  eip          = true
+  env          = "PoC"
+}
+
+module "ngw" {
+  source            = "app.terraform.io/iaac-anz-private/ngw/aws"
+  version = "0.1.0"
+  nat_gateway_route = true
+  env               = "${var.env}"
+  count = "${var.single_nat ? 1 : length(var.private-subnet_cidr_block)}"
+  create_vpc        = "${var.create_vpc}"
+  subnet_id         = "${module.public-subnet.subnetid[0]}"
+  allocation_id     = "${module.ngweip.eipalloc}"
+}
+
