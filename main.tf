@@ -65,7 +65,8 @@ module "public-subnet" {
   subnet_name = "public-subnet"
   vpc_id = "${module.corevpc.vpcid}"
   subnet_cidr_block = "${var.public-subnet-cidr_block}"
-  availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
+  #availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
+  availability_zone = ["${data.aws_availability_zones.available.names}"]
   create_vpc = "${var.create_vpc}"
   env = "PoC"
 }
@@ -172,3 +173,21 @@ module "ngw" {
   nat_gateway_id         = ["${module.ngw.ngw}"]
   gateway_route = false
 }*/
+
+module "beanstalk-role" {
+  source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
+  version = "0.1.0"
+  role_name = "aws-elasticbeanstalk-service-role"
+}
+
+module "paas-elasticbeanstalk" {
+  source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
+  version = "0.1.0"
+  env = "${var.env}"
+  appname = "sampleapp"
+  service_role = "${module.beanstalk-role.rolearn}"
+  tier = "WebServer" # e.g. ('WebServer', 'Worker')
+  vpcid = "${module.corevpc.vpcid}"
+  version_label = "sample-v0.1"
+  public_subnet = "${module.public-frontend-subnet-primary.subnetid}"
+} 
