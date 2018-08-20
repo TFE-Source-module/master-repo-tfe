@@ -156,7 +156,7 @@ module "ngw" {
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   nat_routes = "${length(var.private-subnet-cidr_block)}"
   create_vpc        = "${var.create_vpc}"
-  subnet_id         = "${module.public-subnet.subnetid[0]}"
+  subnet_id         = "${module.public-subnet.subnetid}"
   allocation_id     = "${module.ngweip.eipalloc}"
   route_table_id         = "${module.private-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
@@ -189,5 +189,5 @@ module "paas-elasticbeanstalk" {
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
-  public_subnet = "${module.public-subnet.subnetid[0]}"
+  public_subnet = "${module.public-subnet.subnetid}"
 } 
