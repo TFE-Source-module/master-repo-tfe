@@ -99,10 +99,10 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-/*module "public-rt-association" {
+module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
   version = "0.1.0"
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.public-subnet.subnetid}"
   route_table_id = "${module.public-route-table.rtid}"
-}*/
+}
