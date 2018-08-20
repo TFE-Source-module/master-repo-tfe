@@ -5,7 +5,7 @@ variable "region" {}
 variable "create_vpc" {}
 variable "enable_dhcp_options" {}
 variable "private-subnet-cidr_block" {
-  default = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24"]
+  default = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
 }
 variable "public-subnet-cidr_block" {
   default = ["10.0.6.0/24", "10.0.7.0/24"]
