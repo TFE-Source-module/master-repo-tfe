@@ -41,7 +41,7 @@ output "az" {
     value = "${data.aws_availability_zones.available.names}"
 }
 
-output "public-subnet" {
+/*output "public-subnet" {
     value = "${module.public-subnet.subnetid}"
 }
 
@@ -55,4 +55,4 @@ output "public-subnet-cidr" {
 
 output "private-subnet-cidr" {
     value = "${module.private-subnets.subnet-cidr}"
-}
+}*/
