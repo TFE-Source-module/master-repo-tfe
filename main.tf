@@ -127,7 +127,7 @@ module "private-rt-association" {
   route_table_id = "${module.private-route-table.rtid}"
 }
 
-module "igw" {
+/*module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
   version = "0.1.4"
@@ -162,7 +162,7 @@ module "ngw" {
   destination_cidr_block = "0.0.0.0/0"
 }
 
-/*module "ngwroute" {
+module "ngwroute" {
   source                 = "app.terraform.io/iaac-anz-private/route/aws"
   version = "0.1.4"
   route_table_id         = "${module.private-route-table.rtid}"
@@ -172,7 +172,7 @@ module "ngw" {
   nat_gateway_route      = true
   nat_gateway_id         = ["${module.ngw.ngw}"]
   gateway_route = false
-}*/
+}
 
 module "beanstalk-role" {
   source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
@@ -190,4 +190,4 @@ module "paas-elasticbeanstalk" {
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
   public_subnet = "${module.public-subnet.subnetid}"
-} 
+}*/
