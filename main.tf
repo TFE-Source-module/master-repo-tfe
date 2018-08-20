@@ -39,7 +39,7 @@ module "corevpc" {
 
 module "private-subnets" {
   source  = "app.terraform.io/iaac-anz-private/subnet/aws"
-  version = "0.1.6"
+  version = "0.1.7"
   subnet_name = "private-subnet"
   vpc_id = "${module.corevpc.vpcid}"
   subnet_cidr_block = "${var.private-subnet-cidr_block}"
@@ -50,7 +50,7 @@ module "private-subnets" {
 
 module "public-subnet" {
   source = "app.terraform.io/iaac-anz-private/subnet/aws"
-  version = "0.1.6"
+  version = "0.1.7"
   subnet_name = "public-subnet"
   vpc_id = "${module.corevpc.vpcid}"
   subnet_cidr_block = "${var.public-subnet-cidr_block}"
