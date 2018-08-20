@@ -133,7 +133,7 @@ module "igw" {
   version = "0.1.3"
   vpc_id                 = "${module.corevpc.vpcid}"
   env                    = "PoC"
-  igw_route              = true
+  igw_route              = false
   create_vpc             = "${var.create_vpc}"
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
@@ -144,14 +144,14 @@ module "ngweip" {
   version = "0.1.2"
   create_vpc   = "${var.create_vpc}"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
-  eip          = true
+  eip          = false
   env          = "PoC"
 }
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
   version = "0.1.8"
-  nat_gateway_route = true
+  nat_gateway_route = false
   env               = "PoC"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   nat_routes = "${length(var.private-subnet-cidr_block)}"
