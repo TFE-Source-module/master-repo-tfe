@@ -149,7 +149,7 @@ module "ngweip" {
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.1.2"
+  version = "0.1.3"
   nat_gateway_route = true
   env               = "PoC"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
