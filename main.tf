@@ -48,7 +48,7 @@ module "corevpc" {
   
 }
 
-module "private-subnets" {
+/*module "private-subnets" {
   source  = "app.terraform.io/iaac-anz-private/subnet/aws"
   version = "0.1.7"
   subnet_name = "private-subnet"
@@ -127,7 +127,7 @@ module "private-rt-association" {
   route_table_id = "${module.private-route-table.rtid}"
 }
 
-/*module "igw" {
+module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
   version = "0.1.4"
