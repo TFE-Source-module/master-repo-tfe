@@ -185,6 +185,7 @@ module "paas-elasticbeanstalk" {
   version = "0.1.3"
   env = "PoC"
   appname = "sampleapp"
+  create_vpc = "${var.create_vpc}"
   service_role = "${module.beanstalk-role.rolearn}"
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
   vpcid = "${module.corevpc.vpcid}"
