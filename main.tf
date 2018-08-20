@@ -148,7 +148,7 @@ module "ngweip" {
 }
 
 module "ngw" {
-  source            = "app.terraform.io/iaac-anz-private/ngw/aws"
+  source            = "app.terraform.io/iaac-anz-private/nat/aws"
   version = "0.1.0"
   nat_gateway_route = true
   env               = "${var.env}"
