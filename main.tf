@@ -101,7 +101,7 @@ module "private-route-table" {
 
 module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
-  version = "0.1.0"
+  version = "0.1.1"
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.public-subnet.subnetid}"
   route_table_id = "${module.public-route-table.rtid}"
