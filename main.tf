@@ -18,7 +18,7 @@ variable "public-subnet-cidr_block" {
 }
 
 variable "single_nat" {
-  default = false
+  default = true
   description = "Set to 'true' for single NAT gateway for all private subnets. Defaults to true"
 }
 
@@ -153,6 +153,7 @@ module "ngw" {
   nat_gateway_route = true
   env               = "PoC"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
+  nat_routes = "${length(var.private-subnet-cidr_block)}"
   create_vpc        = "${var.create_vpc}"
   subnet_id         = "${module.public-subnet.subnetid[0]}"
   allocation_id     = "${module.ngweip.eipalloc}"
