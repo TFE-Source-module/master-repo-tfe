@@ -162,18 +162,6 @@ module "ngw" {
   destination_cidr_block = "0.0.0.0/0"
 }
 
-module "ngwroute" {
-  source                 = "app.terraform.io/iaac-anz-private/route/aws"
-  version = "0.1.4"
-  route_table_id         = "${module.private-route-table.rtid}"
-  count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
-  destination_cidr_block = "0.0.0.0/0"
-  create_vpc             = "${var.create_vpc}"
-  nat_gateway_route      = true
-  nat_gateway_id         = ["${module.ngw.ngwid}"]
-  gateway_route = false
-}
-
 module "beanstalk-role" {
   source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
   version = "0.1.0"
