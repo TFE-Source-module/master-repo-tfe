@@ -106,3 +106,23 @@ module "public-rt-association" {
   subnet_id = "${module.public-subnet.subnetid}"
   route_table_id = "${module.public-route-table.rtid}"
 }
+
+module "private-rt-association" {
+  source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
+  version = "0.1.1"
+  create_vpc = "${var.create_vpc}"
+  subnet_id = "${module.private-subnet.subnetid}"
+  route_table_id = "${module.private-route-table.rtid}"
+}
+
+module "igw" {
+  # Configure IGW
+  source                 = "app.terraform.io/iaac-anz-private/igw/aws"
+  version = "0.1.0"
+  vpc_id                 = "${module.corevpc.vpcid}"
+  env                    = "${var.env}"
+  igw_route              = true
+  create_vpc             = "${var.create_vpc}"
+  route_table_id         = "${module.public-route-table.rtid}"
+  destination_cidr_block = "0.0.0.0/0"
+}
