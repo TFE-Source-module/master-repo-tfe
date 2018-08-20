@@ -4,6 +4,12 @@ variable "aws_secret_key" {}
 variable "region" {}
 variable "create_vpc" {}
 variable "enable_dhcp_options" {}
+variable "private-subnet-cidr_block" {
+  default = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
+}
+variable "public-subnet-cidr_block" {
+  default = ["10.0.6.0/24", "10.0.7.0/24"]
+}
 
 //--------------------------------------------------------------------
 // Data sources
@@ -36,7 +42,7 @@ module "private-subnets" {
   version = "0.1.6"
   subnet_name = "private-subnet"
   vpc_id = "${module.corevpc.vpcid}"
-  subnet_cidr_block = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
+  subnet_cidr_block = "${var.private-subnet-cidr_block}"
   availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
   create_vpc = "${var.create_vpc}"
   env = "PoC"
@@ -47,7 +53,7 @@ module "public-subnet" {
   version = "0.1.6"
   subnet_name = "public-subnet"
   vpc_id = "${module.corevpc.vpcid}"
-  subnet_cidr_block = ["10.0.6.0/24", "10.0.7.0/24"]
+  subnet_cidr_block = "${var.public-subnet-cidr_block}"
   availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}", "${data.aws_availability_zones.available.names[2]}"]
   create_vpc = "${var.create_vpc}"
   env = "PoC"
@@ -75,7 +81,7 @@ module "public-route-table" {
   version = "0.1.1"
   name       = "core-network-frontend-routetable"
   vpc_id     = "${module.corevpc.vpcid}"
-  subnets = ["10.0.6.0/24", "10.0.7.0/24"]
+  subnets = "${var.public-subnet-cidr_block}"
   env        = "PoC"
   type       = "public"                                    # public or private
   create_vpc = "${var.create_vpc}"
@@ -87,7 +93,7 @@ module "private-route-table" {
   version = "0.1.1"
   name       = "core-network-backend-routetable"
   vpc_id     = "${module.corevpc.vpcid}"
-  subnets = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
+  subnets = "${var.private-subnet-cidr_block}"
   env        = "PoC"
   type       = "private"                                    # public or private
   create_vpc = "${var.create_vpc}"

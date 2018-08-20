@@ -48,3 +48,11 @@ output "public-subnet" {
 output "private-subnets" {
     value = "${module.private-subnets.subnetid}"
 }
+
+output "public-subnet-cidr" {
+    value = "${module.public-subnet.subnet-cidr}"
+}
+
+output "private-subnet-cidr" {
+    value = "${module.private-subnet.subnet-cidr}"
+}
