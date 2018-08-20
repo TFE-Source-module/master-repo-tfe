@@ -18,7 +18,7 @@ variable "public-subnet-cidr_block" {
 }
 
 variable "single_nat" {
-  default = false
+  default = true
   description = "Set to 'true' for single NAT gateway for all private subnets. Defaults to true"
 }
 
@@ -158,3 +158,14 @@ module "ngw" {
   allocation_id     = "${module.ngweip.eipalloc}"
 }
 
+module "ngwroute" {
+  source                 = "app.terraform.io/iaac-anz-private/route/aws"
+  version = "0.1.0"
+  route_table_id         = "${module.private-route-table.rtid}"
+  count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
+  destination_cidr_block = "0.0.0.0/0"
+  create_vpc             = "${var.create_vpc}"
+  nat_gateway_route      = true
+  nat_gateway_id         = "${module.ngw.ngw}"
+  gateway_route = false
+}
