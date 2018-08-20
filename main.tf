@@ -18,7 +18,7 @@ variable "public-subnet-cidr_block" {
 }
 
 variable "single_nat" {
-  default = true
+  default = false
   description = "Set to 'true' for single NAT gateway for all private subnets. Defaults to true"
 }
 
