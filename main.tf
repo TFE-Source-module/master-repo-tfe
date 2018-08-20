@@ -68,3 +68,35 @@ module "core-network-dhcp" {
   enable_dhcp_options = "${var.enable_dhcp_options}"
   env = "PoC"
 }
+
+module "public-route-table" {
+  # Configure Public Route Table
+  source     = "app.terraform.io/iaac-anz-private/routetable/aws"
+  version = "0.1.0"
+  name       = "core-network-frontend-routetable"
+  vpc_id     = "${module.corevpc.vpcid}"
+  subnets = ["10.0.6.0/24", "10.0.7.0/24"]
+  env        = "PoC"
+  type       = "public"                                    # public or private
+  create_vpc = "${var.create_vpc}"
+}
+
+module "private-route-table" {
+  # Configure Public Route Table
+  source     = "app.terraform.io/iaac-anz-private/routetable/aws"
+  version = "0.1.0"
+  name       = "core-network-backend-routetable"
+  vpc_id     = "${module.corevpc.vpcid}"
+  subnets = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
+  env        = "PoC"
+  type       = "private"                                    # public or private
+  create_vpc = "${var.create_vpc}"
+}
+
+module "public-rt-association" {
+  source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
+  version = "0.1.0"
+  create_vpc = "${var.create_vpc}"
+  subnet_id = "${module.public-subnet.subnetid}"
+  route_table_id = "${module.public-route-table.rtid}"
+}
