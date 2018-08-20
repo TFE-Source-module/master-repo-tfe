@@ -54,5 +54,5 @@ output "public-subnet-cidr" {
 }
 
 output "private-subnet-cidr" {
-    value = "${module.private-subnet.subnet-cidr}"
+    value = "${module.private-subnets.subnet-cidr}"
 }
