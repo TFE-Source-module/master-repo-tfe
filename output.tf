@@ -46,5 +46,5 @@ output "public-subnet" {
 }
 
 output "private-subnets" {
-    value = "${module.private-subnet.subnetid}"
+    value = "${module.private-subnets.subnetid}"
 }
