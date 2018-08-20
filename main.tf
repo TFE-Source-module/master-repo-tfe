@@ -182,7 +182,7 @@ module "beanstalk-role" {
 
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
-  version = "0.1.1"
+  version = "0.1.2"
   env = "PoC"
   appname = "sampleapp"
   service_role = "${module.beanstalk-role.rolearn}"
