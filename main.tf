@@ -183,11 +183,11 @@ module "beanstalk-role" {
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/managed-roles/aws"
   version = "0.1.0"
-  env = "${var.env}"
+  env = "PoC"
   appname = "sampleapp"
   service_role = "${module.beanstalk-role.rolearn}"
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
-  public_subnet = "${module.public-frontend-subnet-primary.subnetid}"
+  public_subnet = "${module.public-subnet.subnetid[0]}"
 } 
