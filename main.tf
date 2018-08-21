@@ -127,7 +127,7 @@ module "private-rt-association" {
   route_table_id = "${module.private-route-table.rtid}"
 }
 
-/*module "igw" {
+module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
   version = "0.1.4"
@@ -179,4 +179,4 @@ module "paas-elasticbeanstalk" {
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
   public_subnet = "${module.public-subnet.subnetid}"
-}*/
+}
