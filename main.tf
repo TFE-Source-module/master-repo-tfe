@@ -115,7 +115,7 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-/*module "public-rt-association" {
+module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
   version = "0.1.4"
   create_vpc = "${var.create_vpc}"
@@ -141,7 +141,7 @@ module "igw" {
   create_vpc             = "${var.create_vpc}"
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
-}*/
+}
 
 module "ngweip" {
   source       = "app.terraform.io/iaac-anz-private/eip/aws"
