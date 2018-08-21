@@ -191,5 +191,5 @@ module "paas-elasticbeanstalk" {
   #lb_type = "classic"
   #http_listener_enabled = true
   #https_listener_enabled = false
-  public_subnets = "${module.public-subnet.subnetid}"
+  public_subnet = "${module.public-subnet.subnetid}"
 }
