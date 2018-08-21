@@ -170,12 +170,13 @@ module "beanstalk-role" {
 
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
-  version = "1.0.0"
+  version = "0.1.6"
   env = "PoC"
   appname = "sampleapp"
   create_vpc = "${var.create_vpc}"
   service_role = "${module.beanstalk-role.rolearn}"
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
+  solution_stack_name = "64bit Amazon Linux 2018.03 v2.7.2 running Python 3.6"
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
   updating_min_in_service = "1"
@@ -185,7 +186,6 @@ module "paas-elasticbeanstalk" {
   ssh_source_restriction = "0.0.0.0/0"
   root_volume_size = "15"
   root_volume_type = "gp2"
-  availability_zones = "${data.aws_availability_zones.available.names}"
   ssh_listener_port = "22"
   environment_type = "LoadBalanced"
   lb_type = "classic"
