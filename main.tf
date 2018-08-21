@@ -207,7 +207,6 @@ module "db" {
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
   db_subnet_group_name = "${module.private-subnets.subnetid}"
-  availability_zone = ["${data.aws_availability_zones.available.names}"]
   multi_az = true
   name     = "demodb"
   username = "${var.db_user}"
