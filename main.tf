@@ -111,7 +111,7 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-module "public-rt-association" {
+/*module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
   version = "0.1.3"
   create_vpc = "${var.create_vpc}"
@@ -192,4 +192,4 @@ module "paas-elasticbeanstalk" {
   #http_listener_enabled = true
   #https_listener_enabled = false
   public_subnet = "${module.public-subnet.subnetid}"
-}
+}*/
