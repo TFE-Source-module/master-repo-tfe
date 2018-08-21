@@ -111,7 +111,7 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-/*module "public-rt-association" {
+module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
   version = "0.1.3"
   create_vpc = "${var.create_vpc}"
@@ -176,20 +176,20 @@ module "paas-elasticbeanstalk" {
   create_vpc = "${var.create_vpc}"
   service_role = "${module.beanstalk-role.rolearn}"
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
-  solution_stack_name = "64bit Amazon Linux 2018.03 v2.7.2 running Python 3.6"
+  #solution_stack_name = "64bit Amazon Linux 2018.03 v2.7.2 running Python 3.6"
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
-  #updating_min_in_service = "1"
-  #updating_max_batch = "1"
-  #rolling_update_type = "Time"
-  #private_subnets = "${module.private-subnets.subnetid}"
-  #ssh_source_restriction = "0.0.0.0/0"
-  #root_volume_size = "15"
-  #root_volume_type = "gp2"
-  #ssh_listener_port = "22"
-  #environment_type = "LoadBalanced"
-  #lb_type = "classic"
-  #http_listener_enabled = true
-  #https_listener_enabled = false
+  /*updating_min_in_service = "1"
+  updating_max_batch = "1"
+  rolling_update_type = "Time"
+  private_subnets = "${module.private-subnets.subnetid}"
+  ssh_source_restriction = "0.0.0.0/0"
+  root_volume_size = "15"
+  root_volume_type = "gp2"
+  ssh_listener_port = "22"
+  environment_type = "LoadBalanced"
+  lb_type = "classic"
+  http_listener_enabled = true
+  https_listener_enabled = false*/
   public_subnet = "${module.public-subnet.subnetid}"
-}*/
+}
