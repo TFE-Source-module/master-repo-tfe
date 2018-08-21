@@ -200,9 +200,11 @@ module "paas-elasticbeanstalk" {
 
 module "db" {
   source = "app.terraform.io/iaac-anz-private/rds/aws"
-  version = "0.1.7"
+  version = "0.1.8"
   storage_type = "gp2"
   allocated_storage = 5
+  create_vpc = "${var.create_vpc}"
+  create_rds = true
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
