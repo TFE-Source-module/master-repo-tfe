@@ -111,9 +111,9 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-/*module "public-rt-association" {
+module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
-  version = "0.1.2"
+  version = "0.1.3"
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.public-subnet.subnetid}"
   route_table_id = "${module.public-route-table.rtid}"
@@ -121,13 +121,13 @@ module "private-route-table" {
 
 module "private-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
-  version = "0.1.2"
+  version = "0.1.3"
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.private-subnets.subnetid}"
   route_table_id = "${module.private-route-table.rtid}"
 }
 
-module "igw" {
+/*module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
   version = "0.1.4"
