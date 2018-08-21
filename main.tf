@@ -206,7 +206,7 @@ module "db" {
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
-  subnetgrp_create
+  subnetgrp_create = true
   name_prefix = "db-subnetgrp"
   identifier = "mysql"
   subnet_ids = "${module.private-subnets.subnetid}"
