@@ -135,11 +135,12 @@ module "private-rt-association" {
 module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
-  version = "0.1.6"
+  version = "0.1.7"
   vpc_id                 = "${module.corevpc.vpcid}"
   env                    = "PoC"
   igw_route              = true
   create_vpc             = "${var.create_vpc}"
+  igw_route_count = "${length(module.public-route-table.rtid)}"
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
 }
