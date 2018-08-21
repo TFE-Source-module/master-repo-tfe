@@ -170,7 +170,7 @@ module "beanstalk-role" {
 
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
-  version = "0.1.6"
+  version = "1.0.0"
   env = "PoC"
   appname = "sampleapp"
   create_vpc = "${var.create_vpc}"
@@ -178,5 +178,18 @@ module "paas-elasticbeanstalk" {
   tier = "WebServer" # e.g. ('WebServer', 'Worker')
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
-  public_subnet = "${module.public-subnet.subnetid}"
+  updating_min_in_service = "1"
+  updating_max_batch = "1"
+  rolling_update_type = "Time"
+  private_subnets = "${module.private-subnets.subnetid}"
+  ssh_source_restriction = "0.0.0.0/0"
+  root_volume_size = "15"
+  root_volume_type = "gp2"
+  availability_zones = "${data.aws_availability_zones.available.names}"
+  ssh_listener_port = "22"
+  environment_type = "LoadBalanced"
+  lb_type = "classic"
+  http_listener_enabled = true
+  https_listener_enabled = false
+  public_subnets = "${module.public-subnet.subnetid}"
 }
