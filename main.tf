@@ -200,13 +200,16 @@ module "paas-elasticbeanstalk" {
 
 module "db" {
   source = "app.terraform.io/iaac-anz-private/rds/aws"
-  version = "0.1.3"
+  version = "0.1.4"
   storage_type = "gp2"
   allocated_storage = 5
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
-  db_subnet_group_name = "${module.private-subnets.subnetid}"
+  subnetgrp_create
+  name_prefix = "db-subnetgrp"
+  identifier = "mysql"
+  subnet_ids = "${module.private-subnets.subnetid}"
   multi_az = true
   name     = "demodb"
   username = "${var.db_user}"
