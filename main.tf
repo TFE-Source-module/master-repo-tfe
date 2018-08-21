@@ -111,7 +111,7 @@ module "private-route-table" {
   create_vpc = "${var.create_vpc}"
 }
 
-module "public-rt-association" {
+/*module "public-rt-association" {
   source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
   version = "0.1.2"
   create_vpc = "${var.create_vpc}"
@@ -125,7 +125,7 @@ module "private-rt-association" {
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.private-subnets.subnetid}"
   route_table_id = "${module.private-route-table.rtid}"
-}
+}*/
 
 module "igw" {
   # Configure IGW
