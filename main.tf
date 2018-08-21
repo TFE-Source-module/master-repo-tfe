@@ -22,6 +22,10 @@ variable "single_nat" {
   description = "Set to 'true' for single NAT gateway for all private subnets. Defaults to true"
 }
 
+variable "db_user" {}
+
+variable "db_pass" {}
+
 //--------------------------------------------------------------------
 // Data sources
 data "aws_availability_zones" "available" {}
@@ -192,4 +196,18 @@ module "paas-elasticbeanstalk" {
   http_listener_enabled = true
   https_listener_enabled = false*/
   public_subnet = "${module.public-subnet.subnetid}"
+}
+
+module "db" {
+  source = "app.terraform.io/iaac-anz-private/rds/aws"
+  storage_type = "gp2"
+  allocated_storage = 5
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t2.micro"
+
+  name     = "demodb"
+  username = "${var.db_user}"
+  password = "${var.db_pass}"
+  port     = "3306"
 }
