@@ -174,7 +174,7 @@ module "beanstalk-role" {
 
 module "paas-elasticbeanstalk" {
   source = "app.terraform.io/iaac-anz-private/paas-eb/aws"
-  version = "0.1.8"
+  version = "0.1.9"
   env = "PoC"
   appname = "sampleapp"
   create_vpc = "${var.create_vpc}"
