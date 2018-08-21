@@ -125,7 +125,7 @@ module "private-rt-association" {
   create_vpc = "${var.create_vpc}"
   subnet_id = "${module.private-subnets.subnetid}"
   route_table_id = "${module.private-route-table.rtid}"
-}*/
+}
 
 module "igw" {
   # Configure IGW
@@ -179,4 +179,4 @@ module "paas-elasticbeanstalk" {
   vpcid = "${module.corevpc.vpcid}"
   version_label = "sample-v0.1"
   public_subnet = "${module.public-subnet.subnetid}"
-}
+}*/
