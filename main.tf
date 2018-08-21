@@ -140,7 +140,7 @@ module "igw" {
   env                    = "PoC"
   igw_route              = true
   create_vpc             = "${var.create_vpc}"
-  igw_route_count = "${length(module.public-route-table.rtid)}"
+  igw_route_count = "${length(var.public-subnet-cidr_block)}"
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
 }
