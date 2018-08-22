@@ -209,7 +209,7 @@ module "db" {
   create_rds = true
   engine               = "mysql"
   engine_version       = "5.7"
-  instance_class       = "db.t2.large"
+  instance_class       = "db.t2.micro"
   subnetgrp_create = true
   name_prefix = "db-subnetgrp"
   skip_final_snapshot = true
