@@ -166,7 +166,7 @@ module "ngweip" {
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.2.1"
+  version = "0.2.2"
   nat_gateway_route = true
   env               = "PoC"
   name = "Natgateway"
