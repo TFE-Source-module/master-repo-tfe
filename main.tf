@@ -207,7 +207,7 @@ module "db" {
   source = "app.terraform.io/iaac-anz-private/rds/aws"
   version = "0.2.2"
   storage_type = "gp2"
-  allocated_storage = 20
+  allocated_storage = 25
   create_vpc = "${var.create_vpc}"
   create_rds = true
   engine               = "mysql"
