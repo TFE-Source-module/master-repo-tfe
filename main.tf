@@ -213,10 +213,6 @@ module "paas-elasticbeanstalk" {
   http_listener_enabled = true
   https_listener_enabled = false*/
   public_subnet = "${module.public-subnet.subnetid}"
-  tags = {
-    env = "PoC"
-    source = "TFE"
-  }
 }
 
 module "db" {
