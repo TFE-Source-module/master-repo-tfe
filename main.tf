@@ -135,7 +135,7 @@ module "private-rt-association" {
 module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
-  version = "0.2.2"
+  version = "0.2.3"
   name = "Internet-gateway"
   vpc_id                 = "${module.corevpc.vpcid}"
   env                    = "PoC"
@@ -152,7 +152,7 @@ module "igw" {
 
 module "ngweip" {
   source       = "app.terraform.io/iaac-anz-private/eip/aws"
-  version = "0.1.3"
+  version = "0.1.4"
   create_vpc   = "${var.create_vpc}"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   eip          = true
@@ -166,7 +166,7 @@ module "ngweip" {
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.2.2"
+  version = "0.2.3"
   nat_gateway_route = true
   env               = "PoC"
   name = "Natgateway"
