@@ -212,12 +212,12 @@ module "db" {
   instance_class       = "db.t2.micro"
   subnetgrp_create = true
   name_prefix = "db-subnetgrp"
-  skip_final_snapshot = true
+  skip_final_snapshot = false
   identifier = "mysql"
   subnet_ids = "${module.private-subnets.subnetid}"
-  publicly_accessible = true
-  copy_tags_to_snapshot = false
-  multi_az = false
+  publicly_accessible = false
+  copy_tags_to_snapshot = true
+  multi_az = true
   name     = "demodb"
   username = "${var.db_user}"
   password = "${var.db_pass}"
