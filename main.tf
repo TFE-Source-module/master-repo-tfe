@@ -202,7 +202,7 @@ module "paas-elasticbeanstalk" {
 
 module "db" {
   source = "app.terraform.io/iaac-anz-private/rds/aws"
-  version = "0.1.8"
+  version = "0.1.9"
   storage_type = "gp2"
   allocated_storage = 5
   create_vpc = "${var.create_vpc}"
@@ -215,6 +215,8 @@ module "db" {
   skip_final_snapshot = true
   identifier = "mysql"
   subnet_ids = "${module.private-subnets.subnetid}"
+  publicly_accessible = false
+  copy_tags_to_snapshot = false
   multi_az = true
   name     = "demodb"
   username = "${var.db_user}"
