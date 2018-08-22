@@ -30,6 +30,10 @@ variable "db_pass" {}
 // Data sources
 data "aws_availability_zones" "available" {}
 
+data "aws_kms_key" "storagekey" {
+  key_id = "alias/aws/ebs"
+}
+
 //--------------------------------------------------------------------
 // Provider information
 provider "aws" {
@@ -246,4 +250,17 @@ module "private-sg" {
   from_port = "80"
   to_port = "80"
   protocol = "tcp"
+}
+
+module "ebs" {
+  source  = "app.terraform.io/iaac-anz-private/ebs/aws"
+  version = "0.1.1"
+  create = true
+  availability_zone = ""${data.aws_availability_zones.available.names[0]}""
+  kms_key_id = "${data.aws_kms_key.storagekey.arn}"
+  encrypted = true
+  size ="20"
+  type = "gp2"
+  name = "PoCEBS"
+  env = "PoC"
 }
