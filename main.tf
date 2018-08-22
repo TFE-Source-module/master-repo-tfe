@@ -94,10 +94,11 @@ module "core-network-dhcp" {
 module "public-route-table" {
   # Configure Public Route Table
   source     = "app.terraform.io/iaac-anz-private/routetable/aws"
-  version = "0.1.1"
+  version = "0.1.2"
   name       = "core-network-frontend-routetable"
   vpc_id     = "${module.corevpc.vpcid}"
   subnets = "${var.public-subnet-cidr_block}"
+  subnet_id = "${module.public-subnet.subnetid}"
   env        = "PoC"
   type       = "public"                                    # public or private
   create_vpc = "${var.create_vpc}"
@@ -110,7 +111,7 @@ module "private-route-table" {
   name       = "core-network-backend-routetable"
   vpc_id     = "${module.corevpc.vpcid}"
   subnets = "${var.private-subnet-cidr_block}"
-  subnet_id = "${module.public-subnet.subnetid}"
+  subnet_id = "${module.private-subnets.subnetid}"
   env        = "PoC"
   type       = "private"                                    # public or private
   create_vpc = "${var.create_vpc}"
