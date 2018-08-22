@@ -231,3 +231,17 @@ module "db" {
     source = "TFE"
   }
 }
+
+module "private-sg" {
+  source = "app.terraform.io/iaac-anz-private/sg/aws"
+  version = "0.1.0"
+  create_sg = true
+  name = "samplesg"
+  vpc_id = "${module.corevpc.vpcid}"
+  env = "PoC"
+  type = "ingress"
+  cidr_blocks = ["0.0.0.0/0"]
+  from_port = "80"
+  to_port = "80"
+  protocol = "tcp"
+}
