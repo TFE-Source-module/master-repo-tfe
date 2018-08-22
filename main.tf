@@ -235,7 +235,7 @@ module "db" {
 
 module "private-sg" {
   source = "app.terraform.io/iaac-anz-private/sg/aws"
-  version = "0.1.0"
+  version = "0.1.1"
   create_sg = true
   create_vpc = "${var.create_vpc}"
   name = "samplesg"
