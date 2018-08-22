@@ -135,7 +135,7 @@ module "private-rt-association" {
 module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
-  version = "0.2.0"
+  version = "0.2.1"
   name = "Internet-gateway"
   vpc_id                 = "${module.corevpc.vpcid}"
   env                    = "PoC"
