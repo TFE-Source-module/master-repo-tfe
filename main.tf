@@ -135,7 +135,7 @@ module "private-rt-association" {
 module "igw" {
   # Configure IGW
   source                 = "app.terraform.io/iaac-anz-private/igw/aws"
-  version = "0.2.4"
+  version = "0.2.5"
   name = "Internet-gateway"
   vpc_id                 = "${module.corevpc.vpcid}"
   env                    = "PoC"
@@ -144,29 +144,21 @@ module "igw" {
   igw_route_count = "${length(var.public-subnet-cidr_block)}"
   route_table_id         = "${module.public-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
-  tags = {
-    env = "PoC"
-    source = "TFE"
-  }
 }
 
 module "ngweip" {
   source       = "app.terraform.io/iaac-anz-private/eip/aws"
-  version = "0.1.4"
+  version = "0.1.5"
   create_vpc   = "${var.create_vpc}"
   count = "${var.single_nat ? 1 : length(var.private-subnet-cidr_block)}"
   eip          = true
   name = "NatGW-EIP"
   env          = "PoC"
-  tags = {
-    env = "PoC"
-    source = "TFE"
-  }
 }
 
 module "ngw" {
   source            = "app.terraform.io/iaac-anz-private/nat/aws"
-  version = "0.2.3"
+  version = "0.2.4"
   nat_gateway_route = true
   env               = "PoC"
   name = "Natgateway"
@@ -177,10 +169,6 @@ module "ngw" {
   allocation_id     = "${module.ngweip.eipalloc}"
   route_table_id         = "${module.private-route-table.rtid}"
   destination_cidr_block = "0.0.0.0/0"
-  tags = {
-    env = "PoC"
-    source = "TFE"
-  }
 }
 
 module "beanstalk-role" {
