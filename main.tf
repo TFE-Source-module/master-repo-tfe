@@ -256,7 +256,7 @@ module "ebs" {
   source  = "app.terraform.io/iaac-anz-private/ebs/aws"
   version = "0.1.1"
   create = true
-  availability_zone = ""${data.aws_availability_zones.available.names[0]}""
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
   kms_key_id = "${data.aws_kms_key.storagekey.arn}"
   encrypted = true
   size ="20"
