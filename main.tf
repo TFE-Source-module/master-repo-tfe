@@ -217,7 +217,7 @@ module "db" {
   subnet_ids = "${module.private-subnets.subnetid}"
   publicly_accessible = false
   copy_tags_to_snapshot = false
-  multi_az = true
+  multi_az = false
   name     = "demodb"
   username = "${var.db_user}"
   password = "${var.db_pass}"
