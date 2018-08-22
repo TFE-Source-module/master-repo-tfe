@@ -236,6 +236,7 @@ module "private-sg" {
   source = "app.terraform.io/iaac-anz-private/sg/aws"
   version = "0.1.0"
   create_sg = true
+  create_vpc = "${var.create_vpc}"
   name = "samplesg"
   vpc_id = "${module.corevpc.vpcid}"
   env = "PoC"
