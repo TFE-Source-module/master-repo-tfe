@@ -242,7 +242,7 @@ module "ec2" {
 
 module "ebs" {
   source  = "app.terraform.io/iaac-anz-private/ebs/aws"
-  version = "0.1.5"
+  version = "0.1.6"
   create = true
   availability_zone = "${data.aws_availability_zones.available.names}"
   kms_key_id = "${data.aws_kms_key.storagekey.arn}"
