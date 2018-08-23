@@ -252,15 +252,30 @@ module "private-sg" {
   protocol = "tcp"
 }
 
+module "ec2" {
+  source  = "app.terraform.io/iaac-anz-private/ec2/aws"
+  version = "0.1.1"
+  ec2_create = true
+  ami = "ami-00e17d1165b9dd3ec"
+  instance_type = "t2.micro"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+  disable_api_termination = true
+  name = "PoCEC2"
+  env = "PoC"
+  root_vol_type = "gp2"
+  root_vol_size = "20"
+}
+
 module "ebs" {
   source  = "app.terraform.io/iaac-anz-private/ebs/aws"
-  version = "0.1.2"
+  version = "0.1.3"
   create = true
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   kms_key_id = "${data.aws_kms_key.storagekey.arn}"
-  encrypted = false
+  encrypted = true
   size ="20"
   type = "gp2"
   name = "PoCEBS"
   env = "PoC"
+  instance_id = "${module.ec2.instanceid}"
 }
