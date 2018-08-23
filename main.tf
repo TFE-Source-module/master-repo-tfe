@@ -266,3 +266,14 @@ module "ebs" {
   env = "PoC"
   instance_id = "${module.ec2.instanceid}"
 }
+
+module "public-lb" {
+  source = "app.terraform.io/iaac-anz-private/elb/aws"
+  version = "0.1.0"
+  create_vpc = "${var.create_vpc}"
+  availability_zones = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
+  subnets = ["${module.public-subnet.subnetid}"]
+  cross_zone_load_balancing = false
+  elb_name = "public-lb"
+  env = "PoC"
+}
