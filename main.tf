@@ -247,7 +247,7 @@ module "ebs" {
   availability_zone = "${data.aws_availability_zones.available.names}"
   kms_key_id = "${data.aws_kms_key.storagekey.arn}"
   encrypted = true
-  size ="20"
+  size ="30"
   type = "gp2"
   name = "PoCEBS"
   env = "PoC"
