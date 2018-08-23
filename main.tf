@@ -207,7 +207,7 @@ module "db" {
   instance_class       = "db.t2.small"
   subnetgrp_create = true
   name_prefix = "db-subnetgrp"
-  skip_final_snapshot = false
+  skip_final_snapshot = true
   identifier = "mysql"
   subnet_ids = "${module.private-subnets.subnetid}"
   storage_encrypted = true
