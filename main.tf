@@ -1,4 +1,6 @@
+//--------------------------------------------------------------------
 // Variables declaration
+//--------------------------------------------------------------------
 variable "aws_access_key" {}
 
 variable "aws_secret_key" {}
@@ -28,6 +30,7 @@ variable "db_pass" {}
 
 //--------------------------------------------------------------------
 // Data sources
+//--------------------------------------------------------------------
 data "aws_availability_zones" "available" {}
 
 data "aws_kms_key" "storagekey" {
@@ -36,6 +39,7 @@ data "aws_kms_key" "storagekey" {
 
 //--------------------------------------------------------------------
 // Provider information
+//--------------------------------------------------------------------
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
@@ -44,7 +48,6 @@ provider "aws" {
 //--------------------------------------------------------------------
 // Modules
 //--------------------------------------------------------------------
-// Modules
 module "corevpc" {
   source  = "app.terraform.io/iaac-anz-private/vpc/aws"
   version = "0.1.4"
@@ -120,22 +123,6 @@ module "private-route-table" {
   type       = "private"                                    # public or private
   create_vpc = "${var.create_vpc}"
 }
-
-/*module "public-rt-association" {
-  source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
-  version = "0.1.4"
-  create_vpc = "${var.create_vpc}"
-  subnet_id = "${module.public-subnet.subnetid}"
-  route_table_id = "${module.public-route-table.rtid}"
-}
-
-module "private-rt-association" {
-  source     = "app.terraform.io/iaac-anz-private/routetableassociation/aws"
-  version = "0.1.4"
-  create_vpc = "${var.create_vpc}"
-  subnet_id = "${module.private-subnets.subnetid}"
-  route_table_id = "${module.private-route-table.rtid}"
-}*/
 
 module "igw" {
   # Configure IGW
@@ -244,7 +231,7 @@ module "ec2" {
   version = "0.1.2"
   ec2_create = true
   ami = "ami-00e17d1165b9dd3ec"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   subnet_id = "${module.private-subnets.subnetid}"
   disable_api_termination = true
   name = "PoCEC2"
