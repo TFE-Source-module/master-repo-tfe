@@ -273,7 +273,7 @@ module "public-lb" {
   create_vpc = "${var.create_vpc}"
   availability_zones = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
   subnets = ["${module.public-subnet.subnetid}"]
-  cross_zone_load_balancing = false
+  cross_zone_load_balancing = true
   elb_name = "public-lb"
   env = "PoC"
 }
